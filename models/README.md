@@ -4,9 +4,9 @@ The sources of the architecture is recorded in each file, but they are also list
 
 https://exowanderer.medium.com/what-is-this-keras-thing-anyways-fe7aa00158ef
 
-but diverged as learnt more about Keras and early CNN architectures.
+but diverged as I learnt more about Keras and early CNN architectures.
 
-These started as simple CNNs that made sense from a teaching perspective, where I wanted something that was both easy to explain from scratch, and could be run on very limited hardware, as the students in question like to use their laptops rather than the fancy lab computers we provide. When the simplest models proved easy and quick to run on my laptop without CUDA, I started exploring the space of ore complex models from the early days of CNNs
+These started as simple CNNs that made sense from a teaching perspective, where I wanted something that was both easy to explain from scratch, and could be run on very limited hardware, as the students in question like to use their laptops rather than the fancy lab computers we provide. When the simplest models proved easy and quick to run on my laptop without CUDA, I started exploring the space of more complex models from the early days of CNNs
 
 ## LeNet Variations
 
@@ -33,7 +33,7 @@ To experiment with the effect of more FC output layers, I created a version of t
 
 This bulks up the number of layers towards a VGG-type model. We have 2 x 32 filter convolutional layers, 2 x 64 filter layers and 3 x 128 filter layers with the same 10 unit output layer as LeNet. As throughout, when I say m x n filters, it denotes a block of m layers each with n filters that is followed by batch normalization and max pooling.
 
-For comparison with models below, it has 8 layers, but 7 of these are convolutional.
+For comparison with models below, it has 8 layers, but 7 of these are convolutional (whereas the VGG8s typically have 6 covolutional layers and 2 fully connected layers).
 
 ### LeNet Plus Dense
 
@@ -81,7 +81,7 @@ I would argue this is closest to VGG11 since it has the same pattern of filters 
 From:
 Thorat, P., Tongaonkar, R. and Jagtap, V., 2020. Towards designing the best model for classification of fish species using deep neural networks. In Proceeding of International Conference on Computational Science and Applications: ICCSA 2019 (pp. 343-351). Springer Singapore.
 
-An 8 layer VGG variant with: a convolution layer with 32 filters, two convolution layers with 64 filters, 3 convolution layers with 128 filters, followed by a 1024 unit FC layer and an n-class output layer. (So VGG8_3 replacing a 32 filter layer with a 128 filter layer.) As they point out this is the first 6 layers of VGG11 (though with the number of filters halved).
+An 8 layer VGG variant with: a convolution layer with 32 filters, two convolution layers with 64 filters, 3 convolution layers with 128 filters, followed by a 1024 unit FC layer and an n-class output layer. (So VGG8_3 replacing a 32 filter layer with a 128 filter layer.) As they point out this is a cut down version of VGG16 (though with the number of filters at each layer halved).
 
 ### VGG8_F/M
 
