@@ -59,7 +59,7 @@ def main():
     # Batch size, in case we need to adjust this
     parser.add_argument('--batch_size', help='Specify batch size', default=64)
     # Patience, in case we need to adjust this
-    parser.add_argument('--patience', help='How many epochs to wait before inviking early stopping ', default=64)
+    parser.add_argument('--patience', help='How many epochs to wait before inviking early stopping ', default=3)
 
     args = parser.parse_args()
 
@@ -157,7 +157,8 @@ def main():
     # early_stopping:   When to stop training if performance plateaus.
     
     validation_split = 0.1  
-    batch_size = 64 # The larger the batch size, the more memory a given dataset uses.
+    batch_size = 64 # The larger the batch size, the more memory a
+                    # given dataset uses.
 
     # If we have specified the number of epochs, then run for that
     # number irrespective of the way that training goes. Otherwise do
