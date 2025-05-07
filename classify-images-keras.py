@@ -42,11 +42,8 @@ from models.alexnet import AlexNet
 from models.vgg11 import VGG11
 
 def main():
-    # Generalise the code by allowing the model and dataset to be picked
-    # on the command line.
-    #
-    # Further enhancements would allow other paramaters (such as
-    # patience) to be selected.
+    # Generalise the code by allowing the model, dataset and some of
+    # the hyperparameters to be picked on the command line.
     parser = argparse.ArgumentParser(description='Keras/TensorFlow for image classification')
     # Possible values: mnist, fashion_mnist, cifar10
     parser.add_argument('--dataset', help='Which datset to use.', default='mnist')
@@ -54,9 +51,10 @@ def main():
     parser.add_argument('--model', help='Which model to use.', default='LeNet')
     # Possible values: y or yes for display, anothing else for no display
     parser.add_argument('--display', help='Display training data?', default='n')
-    # How many epochs (mainly to run test cases). Default is 50, but
-    # we run with early stopping, so just need this to be larger than
-    # necessary for convergence (which is less than 20 in all cases).
+    # Use epochs to specify a number to run without early stopping. If
+    # you don't specify the script will run 50 epochs with early
+    # stopping (which for the 3 simple datsets has always been less
+    # than 20).
     parser.add_argument('--epochs', help='Specify number of epochs')
     # Batch size, in case we need to adjust this
     parser.add_argument('--batch_size', help='Specify batch size', default=64)
@@ -79,8 +77,8 @@ def main():
         exit(0)
     
     # Conv2D, the main Keras model layer we will use, requires 4D
-    # inputs: batch, row, col, color. If we have no color dimension,
-    # add the color dimensions to represent greyscale.
+    # inputs: batch, row, col, color. If we have no color dimension
+    # (as in MNIST), add the color dimensions to represent greyscale.
     if np.ndim(X_train) == 3: 
         COLOR_DIM = -1
         X_train = np.expand_dims(X_train, axis=COLOR_DIM)
@@ -171,9 +169,8 @@ def main():
             y=y_train,
             batch_size=batch_size,
             epochs=int(args.epochs),
-            #validation_data = (X_valid, y_valid),
+            # The alternative is to explicitly set validation_data 
             validation_split = validation_split,
-            #callbacks=[early_stopping]
         )
     else:
         early_stopping = callbacks.EarlyStopping(patience=int(args.patience))
@@ -182,7 +179,6 @@ def main():
             y=y_train,
             batch_size=batch_size,
             epochs=50,
-            #validation_data = (X_valid, y_valid),
             validation_split = validation_split,
             callbacks=[early_stopping]
         )    
