@@ -53,7 +53,7 @@ def main():
     parser.add_argument('--display', help='Display training data?', default='n')
     # Use epochs to specify a number to run without early stopping. If
     # you don't specify the script will run 50 epochs with early
-    # stopping (which for the 3 simple datsets has always been less
+    # stopping (which for the 3 simple datsets has rarely been more
     # than 20).
     parser.add_argument('--epochs', help='Specify number of epochs')
     # Batch size, in case we need to adjust this
