@@ -35,7 +35,7 @@ from models.lenetPlusDense import LeNetPlusDense
 from models.vgg8_2 import VGG8_2
 from models.vgg8_3 import VGG8_3
 from models.vgg8_4 import VGG8_4
-#from models.vgg8_5 import VGG8_5
+from models.vgg8_5 import VGG8_5
 from models.vgg8_F import VGG8_F
 from models.vgg8_M import VGG8_M
 from models.alexnet import AlexNet
@@ -57,12 +57,14 @@ def main():
     # How many epochs (mainly to run test cases). Default is 50, but
     # we run with early stopping, so just need this to be larger than
     # necessary for convergence (which is less than 20 in all cases).
-    parser.add_argument('--epochs', help='Specify number of epochs', default=50)
+    parser.add_argument('--epochs', help='Specify number of epochs')
     # Batch size, in case we need to adjust this
     parser.add_argument('--batch_size', help='Specify batch size', default=64)
+    # Patience, in case we need to adjust this
+    parser.add_argument('--patience', help='How many epochs to wait before inviking early stopping ', default=64)
 
     args = parser.parse_args()
-    
+
     # Load the data from Keras. Choice of MNIST, Fashion MNIST and CIFAR-10
     #
     dataset = args.dataset
@@ -119,6 +121,8 @@ def main():
         network = VGG8_3(img_shape, num_classes)
     elif arch == 'VGG8_4':
         network = VGG8_4(img_shape, num_classes)
+    elif arch == 'VGG8_5':
+        network = VGG8_5(img_shape, num_classes)
     elif arch == 'VGG8_F':
         network = VGG8_F(img_shape, num_classes)
     elif arch == 'VGG8_M':
@@ -153,20 +157,35 @@ def main():
     # validation_split: How many images to hold out per epoch
     # batch size:       Could be 32, 64, 128, 256, 512
     # early_stopping:   When to stop training if performance plateaus.
-    epochs = int(args.epochs) #50         
+    
     validation_split = 0.1  
     batch_size = 64 # The larger the batch size, the more memory a given dataset uses.
-    early_stopping = callbacks.EarlyStopping(patience=3)
 
-    history = model.fit(
-        x=X_train,
-        y=y_train,
-        batch_size=batch_size,
-        epochs=epochs,
-        #validation_data = (X_valid, y_valid),
-        validation_split=validation_split,
-        callbacks=[early_stopping]
-    )
+    # If we have specified the number of epochs, then run for that
+    # number irrespective of the way that training goes. Otherwise do
+    # early stopping after validation error hadn't improved for
+    # patience=3 epochs.
+    if args.epochs:
+        history = model.fit(
+            x=X_train,
+            y=y_train,
+            batch_size=batch_size,
+            epochs=int(args.epochs),
+            #validation_data = (X_valid, y_valid),
+            validation_split = validation_split,
+            #callbacks=[early_stopping]
+        )
+    else:
+        early_stopping = callbacks.EarlyStopping(patience=int(args.patience))
+        history = model.fit(
+            x=X_train,
+            y=y_train,
+            batch_size=batch_size,
+            epochs=50,
+            #validation_data = (X_valid, y_valid),
+            validation_split = validation_split,
+            callbacks=[early_stopping]
+        )    
 
     # Print a summary of the model
     model.summary()
