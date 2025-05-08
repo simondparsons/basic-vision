@@ -38,9 +38,7 @@ class VGG11(Backbone):
     padding = 'same'       # maintain the shape of feature maps per layer
     strides = 1            # do not downsample via stride
 
-    # Filters in the convolution layes. The refernce above suggests
-    # that there should be twice as many filters in each layer, ie 64, 128 and 256.
-    #
+    # Filters in the convolution layers.
     nfilters_hidden1 = 64   # Start with 64 convolution filters to train
     nfilters_hidden2 = 128  # Then twice as many filters to train
     nfilters_hidden3 = 256  # The doubling the number of filters once more.
@@ -69,7 +67,7 @@ class VGG11(Backbone):
             )
         )
 
-        # Add the first  convolution layers with 64 filters
+        # Add the first convolution layer with 64 filters
         self.model.add(
             layers.Conv2D(
                 filters=self.nfilters_hidden1,
@@ -95,7 +93,8 @@ class VGG11(Backbone):
             )
         )
 
-        # Add the next convolution block, again 1 layer with 128 filters
+        # Add the next convolution block, again 1 layer this time with
+        # 128 filters
         self.model.add(
             layers.Conv2D(
                 filters=self.nfilters_hidden2,

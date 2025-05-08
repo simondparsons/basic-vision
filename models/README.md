@@ -85,7 +85,10 @@ An 8 layer VGG variant with: a convolution layer with 32 filters, two convolutio
 
 ### VGG8_F/M
 
-Probably the most authentic since the come from the VGG group, but (as with VGG16 etc) the paper that introdcued them didn't given them the VGG name, just calling them the Fast and Medium architectures, but they have the requisite 8 layers. (There is also a Slow architecture, which differs only in strides and using 3x3 pooling --- I wanted to focus on a common pooling and filtering regime and so ignored this one.)
+Probably the most authentic since they come from the VGG group in:
+
+
+but (as with VGG16 etc) the paper that introdcued them didn't given them the VGG name, just calling them the Fast and Medium architectures, but they have the requisite 8 layers. (There is also a Slow architecture, which differs only in strides and using 3x3 pooling --- I wanted to focus on a common pooling and filtering regime and so ignored this one.)
 
 * Fast: a 64 filter layer, a 256 filter layer, then 3 x 256 filter layers followed by 2 FC layers and an output layer.
 
@@ -94,6 +97,10 @@ Probably the most authentic since the come from the VGG group, but (as with VGG1
 Interestingly the first pairs of layers use 11x11 and 5x5 filters (Slow) or 7x7 and 5x5 (Medium), so harking back to AlexNet there, and ramping up the number of filters faster than VGG11 and so on do.
 
 Also note that, unlike the VGG8_ns above, which have 6 convolution layers and 2 other weighted layers, these both have 5 convolutional layers and 3 other weighted layers.
+
+### VGG8_11
+
+Inspired by VGG_5's concept of being a cut down version of a network from [Simonyan and Zisserman 2015], this is VGG11 with the convolutional layers cut down to 5. Includes a 64 filter layer, a 128 filter layer, 2 x 256 filter layers, and one 512 filter layer, followed by the usual 120 unit FC layer, an 84 unit FC layer and then the 10 unit output layer.
 
 ## AlexNet
 
