@@ -43,7 +43,7 @@ A total of 9 layers, with one more FC layer than LeNet Plus.
 
 ## VGG8 Variations
 
-VGG8 is not a specific architecture from [Simonyan and Zisserman 2015] (despite what some folk say) since the simplest architecture in that paper is VGG11, with 11 weighted layers. Instead a number of people have created their own models that they call VGG8.
+VGG8 is not a specific architecture from [Simonyan and Zisserman 2015] (despite what some folk say) since the simplest architecture in that paper is VGG11, with 11 weighted layers. Instead a number of people have created their own models that they call VGG8 with 8 layers with learned weights.
 
 I have implemented:
 
@@ -87,20 +87,21 @@ An 8 layer VGG variant with: a convolution layer with 32 filters, two convolutio
 
 Probably the most authentic since they come from the VGG group in:
 
+Chatfield, K., Simonyan, K., Vedaldi, A. and Zisserman, A., 2014. Return of the devil in the details: Delving deep into convolutional nets. arXiv preprint arXiv:1405.3531.
 
-but (as with VGG16 etc) the paper that introdcued them didn't given them the VGG name, just calling them the Fast and Medium architectures, but they have the requisite 8 layers. (There is also a Slow architecture, which differs only in strides and using 3x3 pooling --- I wanted to focus on a common pooling and filtering regime and so ignored this one.)
+but (as with VGG16 etc) the paper that introdcued them didn't given them the VGG name, just calling them the Fast and Medium architectures, but they have the requisite 8 layers. (There is also a Slow architecture, which differs only in strides and using 3x3 pooling --- I wanted to focus on a common pooling and filtering regime and so ignored that one.)
 
 * Fast: a 64 filter layer, a 256 filter layer, then 3 x 256 filter layers followed by 2 FC layers and an output layer.
 
 * Medium: a 96 filter layer, a 256 filter layer, then 3 x 512 filter layers followed by 2 FC layers and an output layer.
 
-Interestingly the first pairs of layers use 11x11 and 5x5 filters (Slow) or 7x7 and 5x5 (Medium), so harking back to AlexNet there, and ramping up the number of filters faster than VGG11 and so on do.
+Interestingly the first pairs of layers use 11x11 and 5x5 filters (Slow) or 7x7 and 5x5 (Medium), so harking back to AlexNet there, and both architectures ramp up the number of filters faster than VGG11 and so on do. Also note that, unlike the VGG8_ns above, which have 6 convolution layers and 2 other weighted layers, these both have 5 convolutional layers and 3 other weighted layers.
 
-Also note that, unlike the VGG8_ns above, which have 6 convolution layers and 2 other weighted layers, these both have 5 convolutional layers and 3 other weighted layers.
+Because I had been using 3x3 filters in all other architectures, that is what I used here, so mine versions of VGG8_F and VGG8_M are a bit inauthentic.
 
 ### VGG8_11
 
-Inspired by VGG_5's concept of being a cut down version of a network from [Simonyan and Zisserman 2015], this is VGG11 with the convolutional layers cut down to 5. Includes a 64 filter layer, a 128 filter layer, 2 x 256 filter layers, and one 512 filter layer, followed by the usual 120 unit FC layer, an 84 unit FC layer and then the 10 unit output layer.
+Inspired by VGG8_5's concept of being a cut down version of a network from [Simonyan and Zisserman 2015], this is VGG11 with the convolutional layers cut down to 5 (so 8 weighted layers in all). Includes a 64 filter layer, a 128 filter layer, 2 x 256 filter layers, and one 512 filter layer followed by the usual 120 unit FC layer, an 84 unit FC layer and then the 10 unit output layer.
 
 ## AlexNet
 
@@ -111,11 +112,11 @@ https://pabloinsente.github.io/the-convolutional-network
 
 but is modified to use 3x3 filters so that it works for the 28x28 and 32x32 images in MNIST Fashion MNIST and CIFAR-10. The structure is: a 96 filter convolution layer, a 256 filter convolution layer, 3 x 384 filter convolution layers, two FC layers and an output layer. The FC layers follow the "dense" pattern of a 120 unit FC layer, an 84 unit FC layer and then the 10 unit output layer that I borrowed from LeNet.
 
-This has 8 layers in total, so is a good comparison point for the VGG8 family, thoughmaybe not so good as the following variation.
+This has 8 layers in total, so is a good comparison point for the VGG8 family, though maybe not so good as the following variation.
 
 ### AlexNet Plus
 
-Replaces the output layers of the above AlexNet reconstruction (which came from LeNet) with those from VGG8_F/M. This creates an archiecture that has the same combinations of layers, but in terms of number of filters sits in between them.
+Replaces the output layers of the above AlexNet reconstruction (which came from LeNet) with those from VGG8_F/M. This creates an architecture that has the same combinations of layers, but in terms of number of filters sits in between them.
 
 ## VGG9
 

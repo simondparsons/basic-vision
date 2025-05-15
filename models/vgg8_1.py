@@ -31,8 +31,7 @@ class VGG8_1(Backbone):
     padding = 'same'       # maintain the shape of feature maps per layer
     strides = 1            # do not downsample via stride
 
-    # Filters in the convolution layers. The refernce above suggests
-    # that there should be twice as many filters in each layer, ie 64, 128 and 256.
+    # Filters in the convolution layers as per the reference above.
     #
     nfilters_hidden1 = 128  # Start with 128 convolution filters to train
     nfilters_hidden2 = 256  # Then twice as many filters to train

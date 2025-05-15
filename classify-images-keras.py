@@ -31,11 +31,12 @@ from models.lenet3layer import LeNet3layer
 from models.lenet3layerDense import LeNet3layerDense
 from models.lenetPlus import LeNetPlus
 from models.lenetPlusDense import LeNetPlusDense
-#from models.vgg8_1 import VGG8_1
+from models.vgg8_1 import VGG8_1
 from models.vgg8_2 import VGG8_2
 from models.vgg8_3 import VGG8_3
 from models.vgg8_4 import VGG8_4
 from models.vgg8_5 import VGG8_5
+from models.vgg8_11 import VGG8_11
 from models.vgg8_F import VGG8_F
 from models.vgg8_M import VGG8_M
 from models.alexnet import AlexNet
@@ -121,6 +122,8 @@ def main():
         network = VGG8_4(img_shape, num_classes)
     elif arch == 'VGG8_5':
         network = VGG8_5(img_shape, num_classes)
+    elif arch == 'VGG8_11':
+        network = VGG8_11(img_shape, num_classes)
     elif arch == 'VGG8_F':
         network = VGG8_F(img_shape, num_classes)
     elif arch == 'VGG8_M':

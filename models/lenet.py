@@ -55,6 +55,7 @@ class LeNet(Backbone):
             )
         )
 
+        
         # Reduce the dimensionality after the first Conv-layer w/ MaxPool2D
         self.model.add(
             layers.MaxPooling2D(
