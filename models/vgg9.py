@@ -1,29 +1,28 @@
-# vgg8_3.py
+# vgg9.py
 #
 # Simon Parsons
 # 25-04-25
 #
-# This starts from the LeNet5 reconstruction from:
+# This started from the LeNet5 reconstruction from:
 # https://exowanderer.medium.com/what-is-this-keras-thing-anyways-fe7aa00158ef
 #
-# and extends it to the description of what is called VGG8 here:
+# and extended it to the description of what is called VGG8 here:
 #
 # Zhang, Q., Shen, Y. and Yi, Z., 2019, November. Video-based traffic
 # sign detection and recognition. In 2019 International Conference on
 # Image and Video Processing, and Artificial Intelligence (Vol. 11321,
 # pp. 284-291). SPIE.
 #
-# This is one of a number of alternative descriptions of networks
-# going under the name VGG8. It claims to have dropout between
-# convolutional layers, which I am not sure makes sense --- I have
-# ignored it. It has half as many filters at each stage as VGG11.
-#
-# Note that my reimplementation adds batch normalization and dropout.
+# making the model I have called VGG8_3, but some sloppy editing added
+# another convolutional block with a single 128 filter layer. That
+# would be unremarkable,e xcept that it seemed to outperform other
+# models in the VGG8 family (possibly just because it is slightly
+# deeper). Anyhow, reader I kept it and called it VGG9.
 
 from models.backbone import Backbone 
 from tensorflow.keras import layers, models
 
-class VGG8_3(Backbone):
+class VGG9(Backbone):
     # First we set up some constants that we will use to do this
     # across the various layers.
     kernel_shape = 3, 3    # train 3x3 kernels across all Conv layers
@@ -39,7 +38,7 @@ class VGG8_3(Backbone):
     nfilters_hidden3 = 128 # Then twice as many filters again. 
 
     # Define how we will build the model
-    model = models.Sequential(name='VGG8_3')
+    model = models.Sequential(name='VGG9')
 
     def buildModel(self):
         # Create the input layer to understand the shape of each image and batch-size 

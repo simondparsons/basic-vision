@@ -39,8 +39,10 @@ from models.vgg8_5 import VGG8_5
 from models.vgg8_11 import VGG8_11
 from models.vgg8_F import VGG8_F
 from models.vgg8_M import VGG8_M
-from models.alexnet import AlexNet
+from models.vgg9 import VGG9
 from models.vgg11 import VGG11
+from models.alexnet import AlexNet
+from models.alexnetPlus import AlexNetPlus
 
 def main():
     # Generalise the code by allowing the model, dataset and some of
@@ -128,12 +130,12 @@ def main():
         network = VGG8_F(img_shape, num_classes)
     elif arch == 'VGG8_M':
         network = VGG8_M(img_shape, num_classes)
+    elif arch == 'VGG9':
+        network = VGG9(img_shape, num_classes)
     elif arch == 'VGG11':
         network = VGG11(img_shape, num_classes)
     elif arch == 'AlexNet':
         network = AlexNet(img_shape, num_classes)
-    elif arch ==  'AlexNetLight':
-        network = AlexNetLight(img_shape, num_classes)
     elif arch ==  'AlexNetPlus':
         network = AlexNetPlus(img_shape, num_classes)
     else:

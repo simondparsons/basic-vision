@@ -1,4 +1,4 @@
-# alexnet.py
+# alexnetPlus.py
 #
 # Simon Parsons
 # 25-04-26
@@ -16,7 +16,7 @@
 # layers, and 4) the padding, to get a final image that was between
 # 3x3 and 5x5.
 #
-# I have included the original Alexnet values for tehse parameters as
+# I have included the original Alexnet values for these parameters as
 # comments in the Keras convolution layers so the code can be adjusted
 # back to the original parameters for AlexNet easily. Or you can
 # download the code at the URL above and tweak it to work with larger
@@ -35,28 +35,26 @@
 #
 # One of the changes I referred to at the start is the introduction of
 # batch normalization, the other is the trimming of the output stage
-# to the pattern of fully connected layers in the LeNET architecture
-# at the same URL --- 120 and then 84 units (rather than 4096 as in
-# original AlexNet). For something closer to the original (1024 and
-# 1024 units), see the model I call AlexNet Plus).
+# to the pattern of fully connected layers from the 4096 units in
+# original AlexNet to 1024. (My alexnet.py has an even lighter set of
+# FC layers inspired by LeNet.)
 #
-# Note that looking at the discussion of AlexNet in
+# The reason for this choice is that comparing AlexNet to teh VGG
+# architectures in
 #
 # K. Simonyan & A, Zisserman Very Deep Convolutional Networks for
 # Large-scale Image Recognition, 3rd International Conference on
 # Learning Representations, 2015
 #
-# which was the paper which introduced the VGG family, the larger
-# filters in the early stages of AlexNet were the main distinguishing
-# factor between it and VGG, so there is not much to choose between my
-# code and that of the VGG family. For comparison this has 8 weighted
-# layers so the comparison point is the VGG8 which, of course, is not
-# featured in [Simonyam & Zisserman 2015].
+# makes it clear that with the 3x3 filters I have adopted, the
+# comparison point for AlexNet (with its 8 layers) is the VGG8 family,
+# and many of these use 1024 units in the fully connected
+# layers.
 
 from models.backbone import Backbone 
 from tensorflow.keras import layers, models
 
-class AlexNet(Backbone):
+class AlexNetPlus(Backbone):
     # Here we set up some constants that we will use across the various layers.
     kernel_shape = (3, 3)# train 3x3 kernels across all Conv layers
     activation = 'relu'  # use Rectified Linear Unit activiation functions
@@ -72,7 +70,7 @@ class AlexNet(Backbone):
     nfilters_hidden3 = 384 # and finish with 384.
 
     # Define how we will build the model
-    model = models.Sequential(name='AlexNet')
+    model = models.Sequential(name='AlexNetPlus')
 
     def buildModel(self):
         # Create the input layer to understand the shape of each image and batch-size 
@@ -211,7 +209,7 @@ class AlexNet(Backbone):
         # inspiration from the description of LeNet at the same URL. 
         self.model.add(
             layers.Dense(
-                units=120,
+                units=1024,
                 # units = 4096, # Original AlexNet value
                 activation="relu",
                 name="Dense_layer_1"
@@ -227,7 +225,7 @@ class AlexNet(Backbone):
         # A fully connected layer. Original Alexnet has 4096 units.
         self.model.add(
             layers.Dense(
-                units=84,
+                units=1024,
                 # units = 4096, # Original AlexNet value
                 activation="relu",
                 name="Dense_Layer_2"
