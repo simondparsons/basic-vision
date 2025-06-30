@@ -68,7 +68,7 @@ Zhang, Q., Shen, Y. and Yi, Z., 2019, November. Video-based traffic sign detecti
 
 3 sets of pairs of convolutional layers, with 32, 64 and 128 filters, followed by a 1024 unit FC layer and an n-class output layer.
 
-This configuration has one less convolution layer than LeNetPlusDense (one with 128 filters) but has a Dense layer with more units.
+This configuration has one less convolution layer than LeNet Plus Dense (one with 128 filters) but has a Dense layer with more units.
 
 ### VGG8_4
 
@@ -89,7 +89,7 @@ Probably the most authentic since they come from the VGG group in:
 
 Chatfield, K., Simonyan, K., Vedaldi, A. and Zisserman, A., 2014. Return of the devil in the details: Delving deep into convolutional nets. arXiv preprint arXiv:1405.3531.
 
-but (as with VGG16 etc) the paper that introdcued them didn't given them the VGG name, just calling them the Fast and Medium architectures, but they have the requisite 8 layers. (There is also a Slow architecture, which differs only in strides and using 3x3 pooling --- I wanted to focus on a common pooling and filtering regime and so ignored that one.)
+but (as with VGG16 etc) the paper that introduced them didn't given them the VGG name, just calling them the Fast and Medium architectures, but they have the requisite 8 layers. (There is also a Slow architecture, which differs only in strides and using 3x3 pooling --- I wanted to focus on a common pooling and filtering regime and so ignored that one.)
 
 * Fast: a 64 filter layer, a 256 filter layer, then 3 x 256 filter layers followed by 2 FC layers and an output layer.
 
@@ -127,7 +127,7 @@ A mistake. The initial implementation of VGG8_3 ended up with a 128 unit convolu
 The lightest model from:
 K. Simonyan & A, Zisserman Very Deep Convolutional Networks for Large-scale Image Recognition, 3rd International Conference on Learning Representations, 2015.
 
-but one that is by far the deepest in number of layers of this set of models (and a good end point for something run on a laptop). We have a 64 filter layer, a 128 filter layer, 2 x 256 filter layers, 2 x 512 filter layers and another 2 x 512 filter layers, followed by the usual 120 unit FC layer, an 84 unit FC layer and then the 10 unit output layer.
+but one that is by far the deepest in number of layers of this set of models (and a good end point for something run on a laptop CPU). We have a 64 filter layer, a 128 filter layer, 2 x 256 filter layers, 2 x 512 filter layers and another 2 x 512 filter layers, followed by the usual 120 unit FC layer, an 84 unit FC layer and then the 10 unit output layer.
 
 ## Deeper networks
 
