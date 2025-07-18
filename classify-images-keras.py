@@ -17,6 +17,8 @@
 # CPU, meaning training on a single epoch on any of the datasets takes
 # no more than ten minutes. (And they rarely need to train for more
 # than 20 epochs on these datasets).
+#
+# For details on the models that can be used here, see the README.
 
 import string
 import argparse
@@ -136,7 +138,7 @@ def main():
         network = VGG11(img_shape, num_classes)
     elif arch == 'AlexNet':
         network = AlexNet(img_shape, num_classes)
-    elif arch ==  'AlexNetPlus':
+    elif arch == 'AlexNetPlus':
         network = AlexNetPlus(img_shape, num_classes)
     else:
         print("I don't know the model:", args.model)
