@@ -54,12 +54,16 @@ Zhang, K., Jia, X., Cao, K., Wang, J., Zhang, Y., Lin, K., Chen, L., Feng, X., Z
 
 3 sets of two convolutional layers, 128, 256 and 512 filters in each, followed by a 1024 unit FC layer and an n-class output layer.
 
+Overall this is the best-perfromaing VGG8 on CIFAR-10.
+
 ### VGG8_2
 
 From:
 Cai, Y., Tang, T., Xia, L., Li, B., Wang, Y. and Yang, H., 2019. Low bit-width convolutional neural network on RRAM. IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems, 39(7), pp.1414-1427.
 
 3 sets of two convolutional layers, 128, 256 and 512 filters in each, followed by a convolutional layer with 1024 filters, and an n-class output layer.
+
+I don't understand why one would use this architecture rather than that of VGG8_1, and this is borne our by the results.
 
 ### VGG8_3
 
@@ -75,6 +79,8 @@ This configuration has one less convolution layer than LeNet Plus Dense (one wit
 Note that none of the above have the same number of filters at each stage as VGG11, so there is an obvious architecture to explore which has pairs of layers with 64, 128 and 256 filters followed by a 1024 unit FC layer and an n-class output layer. (In other words, it is VGG8_3 with double the number of filters in the convolutional stages.)
 
 I would argue this is closest to VGG11 since it has the same pattern of filters from the input layer as all the VGG models in [Simonyan and Zisserman 2015] (it is basically the first six convolution layers of VGG13). But see below.
+
+Pleasingly, this is well-performing network, being almost as accurate as VGG8_1, while running much faster.
 
 ### VGG8_5
 
@@ -97,7 +103,7 @@ but (as with VGG16 etc) the paper that introduced them didn't given them the VGG
 
 Interestingly the first pairs of layers use 11x11 and 5x5 filters (Slow) or 7x7 and 5x5 (Medium), so harking back to AlexNet there, and both architectures ramp up the number of filters faster than VGG11 and so on do. Also note that, unlike the VGG8_ns above, which have 6 convolution layers and 2 other weighted layers, these both have 5 convolutional layers and 3 other weighted layers.
 
-Because I had been using 3x3 filters in all other architectures, that is what I used here, so mine versions of VGG8_F and VGG8_M are a bit inauthentic.
+Because I had been using 3x3 filters in all other architectures, that is what I used here, so my versions of VGG8_F and VGG8_M are a bit inauthentic. They also do not perform very well.
 
 ### VGG8_11
 
@@ -120,7 +126,7 @@ Replaces the output layers of the above AlexNet reconstruction (which came from 
 
 ## VGG9
 
-A mistake. The initial implementation of VGG8_3 ended up with a 128 unit convolution layer just before the FC layer. By the time I discovered the mistake I had run all the experiments and found this interloper had outperformed other VGG8 variants on Fashion MNIST. TBC, the architecture was 3 sets of pairs of convolutional layers, with 32, 64 and 128 filters, followed by a convolutional layer with 128 filters, a 1024 unit FC layer and an n-class output layer. With the additional layer it is a very lightweight 9 layer network.
+A mistake. The initial implementation of VGG8_3 ended up with a 128 unit convolution layer just before the FC layer. By the time I discovered the mistake I had run all the experiments and found this interloper had outperformed other VGG8 variants on Fashion MNIST. TBC, the architecture was 3 sets of pairs of convolutional layers, with 32, 64 and 128 filters, followed by a convolutional layer with 128 filters, a 1024 unit FC layer and an n-class output layer. With the additional layer it is a very lightweight 9 layer network, but performs poorly.
 
 ## VGG11
 
@@ -129,6 +135,8 @@ K. Simonyan & A, Zisserman Very Deep Convolutional Networks for Large-scale Imag
 
 but one that is by far the deepest in number of layers of this set of models (and a good end point for something run on a laptop CPU). We have a 64 filter layer, a 128 filter layer, 2 x 256 filter layers, 2 x 512 filter layers and another 2 x 512 filter layers, followed by the usual 120 unit FC layer, an 84 unit FC layer and then the 10 unit output layer.
 
+Surprisingly poor performer.
+
 ## Deeper networks
 
-VGG11 could be easily modified to give the popular VGG16 and VGG19 architectures from [Simonyan & Zisserman 2015], but these didn't meet my needs for teaching where most studets want to run code on their laptops.
+VGG11 could be easily modified to give the popular VGG16 and VGG19 architectures from [Simonyan & Zisserman 2015], but these didn't meet my needs for teaching where most students want to run code on their laptops.
